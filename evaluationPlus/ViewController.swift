@@ -13,7 +13,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //:
     let userDefaultsObj = UserDefaultsManager()
     var studentNotes: [studentName: [assignment: note]]!
-    //:
+    //: Début du programme
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUserDefaults()
@@ -50,7 +50,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textField.resignFirstResponder()
         return true
     }
-    //:
+    //: Fonction pour prend les notes sauvegardé
     func loadUserDefaults() {
         if userDefaultsObj.doesKeyExist(theKey: "notes") {
             studentNotes = userDefaultsObj.getValue(theKey: "notes") as! [studentName: [assignment: note]]
@@ -58,7 +58,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             studentNotes = [studentName: [assignment: note]]()
         }
     }
-    //:
+    //: Fonction pour sauvegarder les éléves
     @IBAction func addStudents(_ sender: UIButton) {
         if sender.alpha == 0.5 {
             return
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             txt_student_name.resignFirstResponder()
         }
     }
-    //:
+    //: Pour changer l'opacité du bouton
     func textFieldDidBeginEditing(_ textField: UITextField) {
         btnAddStudent.alpha = 1.0
     }

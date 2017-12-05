@@ -23,7 +23,7 @@ class GradeController: UIViewController, UITextFieldDelegate, UITableViewDelegat
     var studentNotes: [studentName: [assignment: note]]!
     var arrOfAssignments: [assignment]!
     var arrOfNotes: [note]!
-    //:
+    //: Début du programme
     override func viewDidLoad() {
         super.viewDidLoad()
         loadUserDefaults()
@@ -39,7 +39,7 @@ class GradeController: UIViewController, UITextFieldDelegate, UITableViewDelegat
         }
         return averageClosure(sum, Double(arrOfNotes.count))
     }
-    //:
+    //:fonction pour prend les notes sauvegardé
     func loadUserDefaults() {
         if userDefaultsObj.doesKeyExist(theKey: "notes") {
             studentNotes = userDefaultsObj.getValue(theKey: "notes") as! [studentName: [assignment: note]]
@@ -47,15 +47,6 @@ class GradeController: UIViewController, UITextFieldDelegate, UITableViewDelegat
             studentNotes = [studentName: [assignment: note]]()
         }
     }
-//    //: PRA QUE SERVE ISSO?????
-//    func loadAssignmentAndNote() {
-//        let name = lbl_student_name.text
-//        let assignment_and_note = studentNotes[name!]
-//        let the_assignment = [assignment](assignment_and_note!.keys)[0]
-//        let the_note = [note](assignment_and_note!.values)[0]
-//        assignment_field.text = the_assignment
-//        note_field.text = String(the_note)
-//    }
     //:
     func fillUpArrays() {
         let name = lbl_student_name.text
@@ -96,7 +87,7 @@ class GradeController: UIViewController, UITextFieldDelegate, UITableViewDelegat
             tableView.deleteRows(at: [indexPath as IndexPath], with: UITableViewRowAnimation.automatic)
         }
     }
-    //:
+    //: Fonction pour sauvegarder le note et le course
     @IBAction func save_assignment_and_grade(_ sender: UIButton) {
         if sender.alpha == 0.5 {
             return
@@ -116,21 +107,23 @@ class GradeController: UIViewController, UITextFieldDelegate, UITableViewDelegat
         textField.resignFirstResponder()
         return true
     }
-    //Fonction pour vider les champs
+    //:Fonction pour vider les champs
     func cleanerFields() {
         note_field.text = ""
         assignment_field.text = ""
         saveAssignmentAndGrade.alpha = 0.5
     }
+    //: Fonction pour le regle 3
     func produitCroise(arrNotes: [Double], notesSur: Double, convertionSur: Double, regle3: (_ note: Double, _ sur: Double, _ convertion: Double) -> Double) -> String {
         let somme = arrNotes.reduce(0, +)
         let conversion = regle3(somme, notesSur, convertionSur)
         return String(format: "Grade : %0.1f/%0.1f or %0.1f/%0.1f", somme, notesSur, conversion, convertionSur)
+    //: Slider pour le note
     }
     @IBAction func sldNotes(_ sender: UISlider) {
         note_field.text = String(format: "%0.1f", sender.value)
     }
-    //:
+    //: Pour changer l'opacité du bouton
     func textFieldDidBeginEditing(_ textField: UITextField) {
             saveAssignmentAndGrade.alpha = 1.0
     }
